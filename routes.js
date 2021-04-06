@@ -31,6 +31,11 @@ router.post('/users', (req, res) => {
     errors.push('Please provide a value for "email"');
   }
 
+  // If there are any errors...
+  if (errors.length > 0) {
+    // Return the validation errors to the client.
+    res.status(400).json({ errors });
+  }
 
   // Add the user to the `users` array.
   users.push(user);
