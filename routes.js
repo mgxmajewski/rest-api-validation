@@ -31,6 +31,11 @@ router.post('/users', (req, res) => {
     errors.push('Please provide a value for "email"');
   }
 
+  // Validate that we have a `password` value.
+  if (!user.password) {
+    errors.push('Please provide a value for "password"');
+  }
+
   // If there are any errors...
   if (errors.length > 0) {
     // Return the validation errors to the client.
