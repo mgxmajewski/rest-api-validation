@@ -26,6 +26,12 @@ router.post('/users', (req, res) => {
     errors.push('Please provide a value for "name"');
   }
 
+  // Validate that we have an `email` value.
+  if (!user.email) {
+    errors.push('Please provide a value for "email"');
+  }
+
+
   // Add the user to the `users` array.
   users.push(user);
 
