@@ -1,6 +1,7 @@
 'use strict';
 
 const express = require('express');
+const bcrypt = require('bcrypt');
 
 // This array is used to keep track of user records
 // as they are created.
@@ -29,6 +30,8 @@ router.post('/users', (req, res) => {
   // Validate that we have an `email` value.
   if (!user.email) {
     errors.push('Please provide a value for "email"');
+  } else {
+    user.password = bcrypt.hashSync(user.password, 10);
   }
 
   // Validate that we have a `password` value.
