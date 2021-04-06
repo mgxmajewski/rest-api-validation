@@ -30,13 +30,16 @@ router.post('/users', (req, res) => {
   // Validate that we have an `email` value.
   if (!user.email) {
     errors.push('Please provide a value for "email"');
-  } else {
-    user.password = bcrypt.hashSync(user.password, 10);
   }
 
   // Validate that we have a `password` value.
-  if (!user.password) {
+  let password = user.password;
+  if (!password) {
     errors.push('Please provide a value for "password"');
+  } else if (password.length < 8 || password.length > 20) {
+    errors.push('Your password should be between 8 and 20 characters');
+  } else {
+    user.password = bcrypt.hashSync(password, 10);
   }
 
   // If there are any errors...
